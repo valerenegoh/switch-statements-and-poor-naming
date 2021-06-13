@@ -11,7 +11,7 @@ public class Rental {
     }
 
     String print() {
-        return String.format("\t%s\t%s\n", movie.getTitle(), getAmount());
+        return String.format("\t%s\t%s\n", movie.getTitle(), getRentalCost());
     }
 
     int getFrequentRenterPoints() {
@@ -19,26 +19,10 @@ public class Rental {
     }
 
     boolean isEligibleForBonus() {
-        return (movie.getPriceCode() == Movie.NEW_RELEASE) && days > 1;
+        return (movie.getType() == MovieType.NEW_RELEASE) && days > 1;
     }
 
-    double getAmount() {
-        double thisAmount = 0;
-        switch (movie.getPriceCode()) {
-            case Movie.REGULAR:
-                thisAmount += 2;
-                if (days > 2)
-                    thisAmount += (days - 2) * 1.5;
-                break;
-            case Movie.NEW_RELEASE:
-                thisAmount += days * 3;
-                break;
-            case Movie.CHILDRENS:
-                thisAmount += 1.5;
-                if (days > 3)
-                    thisAmount += (days - 3) * 1.5;
-                break;
-        }
-        return thisAmount;
+    double getRentalCost() {
+        return movie.getType().getRentalCost(days);
     }
 }

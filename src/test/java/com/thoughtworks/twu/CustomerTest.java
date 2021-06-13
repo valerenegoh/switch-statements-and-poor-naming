@@ -16,11 +16,11 @@ public class CustomerTest {
 
     private Customer dinsdale = new Customer("Dinsdale Pirhana");
 
-    private Movie python = new Movie("Monty Python and the Holy Grail", Movie.REGULAR);
-	private Movie ran = new Movie("Ran", Movie.REGULAR);
-	private Movie la = new Movie("LA Confidential", Movie.NEW_RELEASE);
-	private Movie trek = new Movie("Star Trek 13.2", Movie.NEW_RELEASE);
-	private Movie wallace = new Movie("Wallace and Gromit", Movie.CHILDRENS);
+    private Movie python = new Movie("Monty Python and the Holy Grail", MovieType.REGULAR);
+	private Movie ran = new Movie("Ran", MovieType.REGULAR);
+	private Movie la = new Movie("LA Confidential", MovieType.NEW_RELEASE);
+	private Movie trek = new Movie("Star Trek 13.2", MovieType.NEW_RELEASE);
+	private Movie wallace = new Movie("Wallace and Gromit", MovieType.CHILDRENS);
 
     @BeforeEach
     public void setUpData(){
@@ -34,18 +34,18 @@ public class CustomerTest {
     @Test
     public void shouldOutputEmptyStatement() throws Exception {
         Customer customer = new Customer("Golden Shark");
-        verifyOutput(customer.statement(), "outputEmpty");
+        verifyOutput(customer.getRentalStatement(), "outputEmpty");
     }
 
     @Test
     public void shouldOutputStatement() throws Exception {
-        verifyOutput(dinsdale.statement(), "output1");
+        verifyOutput(dinsdale.getRentalStatement(), "output1");
     }
 
     @Test
     public void shouldOutputChangedStatement() throws Exception {
-        la.setPriceCode(Movie.REGULAR);
-        verifyOutput(dinsdale.statement(), "outputChange");
+        la.setType(MovieType.REGULAR);
+        verifyOutput(dinsdale.getRentalStatement(), "outputChange");
     }
 
     protected void verifyOutput(String actualValue, String fileName) throws IOException{
@@ -53,9 +53,8 @@ public class CustomerTest {
         BufferedReader file = new BufferedReader (new FileReader (filePath));
         BufferedReader actualStream = new BufferedReader (new StringReader (actualValue));
         String thisFileLine;
-        while  ((thisFileLine = file.readLine()) != null) {
+        while ((thisFileLine = file.readLine()) != null) {
             assertEquals(actualStream.readLine(), thisFileLine, "in file: " + fileName);
         }
     }
-
 }

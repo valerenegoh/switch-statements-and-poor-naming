@@ -11,21 +11,17 @@ public class Customer {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
+    public void addRental(Rental rental) {
+        list.add(rental);
     }
 
-    public void addRental(Rental arg) {
-        list.add(arg);
-    }
-
-    public String statement() {
+    public String getRentalStatement() {
         double total = 0;
         int pts = 0;
-        StringBuilder result = new StringBuilder("Rental Record for " + getName() + "\n");
+        StringBuilder result = new StringBuilder("Rental Record for " + name + "\n");
 
         for (Rental r : list) {
-            total += r.getAmount();
+            total += r.getRentalCost();
             pts += r.getFrequentRenterPoints();
             result.append(r.print());
         }

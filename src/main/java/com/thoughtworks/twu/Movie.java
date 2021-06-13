@@ -1,24 +1,20 @@
 package com.thoughtworks.twu;
 
 public class Movie {
-	public static final int  CHILDRENS = 2;
-	public static final int  REGULAR = 0;
-	public static final int  NEW_RELEASE = 1;
-
+	private MovieType type;
 	private String title;
-	private int priceCode;
 
-	public Movie(String title, int priceCode) {
+	public Movie(String title, MovieType type) {
 		this.title = title;
-		this.priceCode = priceCode;
+		this.type = type;
 	}
 
-	public int getPriceCode() {
-		return priceCode;
+	public MovieType getType() {
+		return type;
 	}
 
-	public void setPriceCode(int arg) {
-    	priceCode = arg;
+	public void setType(MovieType type) {
+    	this.type = type;
 	}
 
 	public String getTitle () {
