@@ -3,15 +3,11 @@ package com.thoughtworks.twu;
 public class Rental {
 
     private Movie movie;
-    private int days;
 
+    private int days;
     public Rental(Movie movie, int daysRented) {
         this.movie = movie;
         this.days = daysRented;
-    }
-
-    String print() {
-        return String.format("\t%s\t%s\n", movie.getTitle(), getRentalCost());
     }
 
     int getFrequentRenterPoints() {
@@ -24,5 +20,9 @@ public class Rental {
 
     double getRentalCost() {
         return movie.getType().getRentalCost(days);
+    }
+
+    public String getMovieTitle() {
+        return movie.getTitle();
     }
 }

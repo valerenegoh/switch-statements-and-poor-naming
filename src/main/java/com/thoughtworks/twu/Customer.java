@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 public class Customer {
 
+    private static final String RENTAL_STATEMENT_HEADER = "Rental Record for %s\n";
+    private static final String RENTAL_STATEMENT_ITEM = "\t%s\t%s\n";
+    private static final String RENTAL_STATEMENT_FOOTER = "Amount owed is %s\nYou earned %d frequent renter points";
+
     private String name;
     private ArrayList<Rental> list = new ArrayList<>();
 
@@ -16,21 +20,17 @@ public class Customer {
     }
 
     public String getRentalStatement() {
-        double total = 0;
-        int pts = 0;
-        StringBuilder result = new StringBuilder("Rental Record for " + name + "\n");
+        double totalCost = 0;
+        int points = 0;
+        StringBuilder result = new StringBuilder(String.format(RENTAL_STATEMENT_HEADER, name));
 
-        for (Rental r : list) {
-            total += r.getRentalCost();
-            pts += r.getFrequentRenterPoints();
-            result.append(r.print());
+        for (Rental rental : list) {
+            totalCost += rental.getRentalCost();
+            points += rental.getFrequentRenterPoints();
+            result.append(String.format(RENTAL_STATEMENT_ITEM, rental.getMovieTitle(), rental.getRentalCost()));
         }
 
-        result.append(footer(total, pts));
+        result.append(String.format(RENTAL_STATEMENT_FOOTER, totalCost, points));
         return result.toString();
-    }
-
-    private String footer(double totalAmount, int pts) {
-        return String.format("Amount owed is %s\nYou earned %d frequent renter points", totalAmount, pts);
     }
 }
