@@ -14,21 +14,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CustomerTest {
 	private static final String GOLD_PATH = "data/";
 
-    private Customer dinsdale = new Customer("Dinsdale Pirhana");
+    private Customer customer = new Customer("Dinsdale Pirhana");
 
-    private Movie python = new Movie("Monty Python and the Holy Grail", MovieType.REGULAR);
-	private Movie ran = new Movie("Ran", MovieType.REGULAR);
-	private Movie la = new Movie("LA Confidential", MovieType.NEW_RELEASE);
-	private Movie trek = new Movie("Star Trek 13.2", MovieType.NEW_RELEASE);
-	private Movie wallace = new Movie("Wallace and Gromit", MovieType.CHILDRENS);
+    private Movie movie1 = new Movie("Monty Python and the Holy Grail", MovieType.REGULAR);
+	private Movie movie2 = new Movie("Ran", MovieType.REGULAR);
+	private Movie movie3 = new Movie("LA Confidential", MovieType.NEW_RELEASE);
+	private Movie movie4 = new Movie("Star Trek 13.2", MovieType.NEW_RELEASE);
+	private Movie movie5 = new Movie("Wallace and Gromit", MovieType.CHILDRENS);
 
     @BeforeEach
     public void setUpData(){
-       dinsdale.addRental(new Rental (python, 3));
-       dinsdale.addRental(new Rental (ran, 1));
-       dinsdale.addRental(new Rental (la, 2));
-       dinsdale.addRental(new Rental (trek, 1));
-       dinsdale.addRental(new Rental (wallace, 6));
+       customer.addRental(new Rental (movie1, 3));
+       customer.addRental(new Rental (movie2, 1));
+       customer.addRental(new Rental (movie3, 2));
+       customer.addRental(new Rental (movie4, 1));
+       customer.addRental(new Rental (movie5, 6));
    }
 
     @Test
@@ -39,13 +39,13 @@ public class CustomerTest {
 
     @Test
     public void shouldOutputStatement() throws Exception {
-        verifyOutput(dinsdale.getRentalStatement(), "output1");
+        verifyOutput(customer.getRentalStatement(), "output1");
     }
 
     @Test
     public void shouldOutputChangedStatement() throws Exception {
-        la.setType(MovieType.REGULAR);
-        verifyOutput(dinsdale.getRentalStatement(), "outputChange");
+        movie3.setType(MovieType.REGULAR);
+        verifyOutput(customer.getRentalStatement(), "outputChange");
     }
 
     protected void verifyOutput(String actualValue, String fileName) throws IOException{
